@@ -1,0 +1,27 @@
+{
+  "mcp": {
+    "envelope": "mcp.envelope_v0_1",
+    "request_id": "req_fixture_diagnose_001",
+    "tool": "a11y.diagnose",
+    "client": {
+      "name": "a11y-cli",
+      "version": "0.2.0"
+    }
+  },
+  "input": {
+    "bundle_id": "bundle:fixture:9b6d3c01",
+    "artifacts": ["artifact:dom:index", "artifact:dom:contact"],
+    "profile": "wcag-2.2-aa",
+    "rules": {
+      "include": ["lang", "alt", "button-name", "link-name", "label"],
+      "exclude": []
+    },
+    "output": {
+      "include_fix_guidance": true,
+      "include_evidence": true
+    },
+    "integrity": {
+      "verify_provenance": true
+    }
+  }
+}

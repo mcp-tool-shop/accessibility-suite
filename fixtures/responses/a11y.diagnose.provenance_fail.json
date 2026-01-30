@@ -1,0 +1,13 @@
+{
+  "mcp": {
+    "envelope": "mcp.envelope_v0_1",
+    "request_id": "req_fixture_diagnose_fail",
+    "tool": "a11y.diagnose",
+    "ok": false
+  },
+  "error": {
+    "code": "PROVENANCE_VERIFICATION_FAILED",
+    "message": "Evidence digest mismatch for artifact:dom:index. Expected sha256:a1b2c3..., got sha256:ffffff...",
+    "fix": "Re-run a11y.evidence to recapture evidence, or disable verify_provenance for local debugging."
+  }
+}

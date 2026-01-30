@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-tool-shop.github.io/schemas/evidence.bundle.v0.1.json",
+  "title": "Evidence Bundle",
+  "description": "Tamper-evident bundle with artifacts and provenance",
+  "type": "object",
+  "required": ["bundle_id", "artifacts", "provenance"],
+  "properties": {
+    "bundle_id": {
+      "type": "string",
+      "pattern": "^bundle:[a-z0-9_-]+:[a-f0-9]{8}$",
+      "description": "Unique bundle identifier"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Artifact" },
+      "minItems": 1
+    },
+    "provenance": { "$ref": "#/$defs/Provenance" },
+    "environment": {
+      "type": "object",
+      "description": "Optional capture environment info",
+      "properties": {
+        "os": {
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "platform": { "type": "string" },
+                "arch": { "type": "string" }
+              }
+            }
+          ]
+        },
+        "node": { "type": "string" },
+        "browser": { "type": "string" },
+        "tool_versions": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "labels": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "User-supplied classification labels"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Bundle creation timestamp"
+    }
+  },
+  "$defs": {
+    "Artifact": {
+      "type": "object",
+      "required": ["artifact_id", "media_type", "digest"],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^artifact:[a-z]+:[a-z0-9_-]+$"
+        },
+        "media_type": { "type": "string" },
+        "locator": {
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            {
+              "type": "object",
+              "properties": {
+                "kind": { "type": "string", "enum": ["file", "derived", "url"] },
+                "path": { "type": "string" },
+                "from": { "type": "string" },
+                "url": { "type": "string", "format": "uri" }
+              }
+            }
+          ]
+        },
+        "size_bytes": { "type": "integer", "minimum": 0 },
+        "digest": { "$ref": "#/$defs/Digest" },
+        "labels": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Digest": {
+      "type": "object",
+      "required": ["alg", "hex"],
+      "properties": {
+        "alg": { "type": "string", "enum": ["sha256"] },
+        "hex": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "required": ["record_id", "methods", "inputs", "outputs"],
+      "properties": {
+        "record_id": {
+          "type": "string",
+          "pattern": "^prov:[a-z]+:[a-z0-9_-]+$"
+        },
+        "methods": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "verified": { "type": "boolean" },
+        "agent": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

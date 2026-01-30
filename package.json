@@ -1,0 +1,48 @@
+{
+  "name": "@mcptoolshop/a11y-mcp-tools",
+  "version": "0.3.0",
+  "description": "MCP tools for accessibility evidence capture and diagnosis",
+  "main": "src/index.js",
+  "bin": {
+    "a11y": "./bin/cli.js",
+    "a11y-mcp": "./bin/server.js"
+  },
+  "scripts": {
+    "start": "node bin/server.js",
+    "test": "node --test test/*.test.js test/*.test.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "provenance",
+    "evidence",
+    "testing",
+    "audit"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/mcp-tool-shop/a11y-mcp-tools#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop/a11y-mcp-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop/a11y-mcp-tools/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "htmlparser2": "^9.1.0"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

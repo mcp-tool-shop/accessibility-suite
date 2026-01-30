@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-tool-shop.github.io/schemas/mcp.envelope.v0.1.json",
+  "title": "MCP Envelope v0.1",
+  "description": "Standard request/response envelope for MCP tools",
+  "oneOf": [
+    { "$ref": "#/$defs/Request" },
+    { "$ref": "#/$defs/Response" },
+    { "$ref": "#/$defs/ErrorResponse" }
+  ],
+  "$defs": {
+    "EnvelopeHeader": {
+      "type": "object",
+      "required": ["envelope", "request_id", "tool"],
+      "properties": {
+        "envelope": {
+          "type": "string",
+          "const": "mcp.envelope_v0_1"
+        },
+        "request_id": {
+          "type": "string",
+          "pattern": "^req_[a-zA-Z0-9]+$",
+          "description": "Unique request identifier"
+        },
+        "tool": {
+          "type": "string",
+          "description": "Tool name (e.g., a11y.evidence, a11y.diagnose)"
+        },
+        "client": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        }
+      }
+    },
+    "Request": {
+      "type": "object",
+      "required": ["mcp", "input"],
+      "properties": {
+        "mcp": { "$ref": "#/$defs/EnvelopeHeader" },
+        "input": {
+          "type": "object",
+          "description": "Tool-specific input parameters"
+        }
+      }
+    },
+    "Response": {
+      "type": "object",
+      "required": ["mcp", "result"],
+      "properties": {
+        "mcp": {
+          "allOf": [
+            { "$ref": "#/$defs/EnvelopeHeader" },
+            {
+              "type": "object",
+              "required": ["ok"],
+              "properties": {
+                "ok": { "type": "boolean", "const": true }
+              }
+            }
+          ]
+        },
+        "result": {
+          "type": "object",
+          "description": "Tool-specific result"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": ["mcp", "error"],
+      "properties": {
+        "mcp": {
+          "allOf": [
+            { "$ref": "#/$defs/EnvelopeHeader" },
+            {
+              "type": "object",
+              "required": ["ok"],
+              "properties": {
+                "ok": { "type": "boolean", "const": false }
+              }
+            }
+          ]
+        },
+        "error": {
+          "type": "object",
+          "required": ["code", "message"],
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Machine-readable error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Human-readable error message"
+            },
+            "fix": {
+              "type": "string",
+              "description": "Suggested fix for the error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

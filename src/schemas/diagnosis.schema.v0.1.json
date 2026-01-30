@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcp-tool-shop.github.io/schemas/diagnosis.v0.1.json",
+  "title": "Accessibility Diagnosis",
+  "description": "Deterministic diagnosis output with findings and provenance",
+  "type": "object",
+  "required": ["findings", "summary", "provenance"],
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Finding" }
+    },
+    "summary": { "$ref": "#/$defs/Summary" },
+    "provenance": { "$ref": "#/$defs/Provenance" }
+  },
+  "$defs": {
+    "Finding": {
+      "type": "object",
+      "required": ["id", "severity", "targets"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^a11y\\.[a-z_]+\\.[a-z_]+$",
+          "description": "Finding ID (e.g., a11y.lang.missing)"
+        },
+        "wcag": {
+          "type": "string",
+          "pattern": "^wcag\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "description": "WCAG criterion reference"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "message": { "type": "string" },
+        "targets": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EvidenceAnchor" },
+          "minItems": 1
+        },
+        "fix": { "$ref": "#/$defs/FixGuidance" }
+      }
+    },
+    "EvidenceAnchor": {
+      "type": "object",
+      "required": ["artifact_id"],
+      "properties": {
+        "artifact_id": { "type": "string" },
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/.*$",
+          "description": "JSON Pointer (RFC 6901)"
+        },
+        "selector": {
+          "type": "string",
+          "description": "CSS selector"
+        },
+        "line_span": {
+          "type": "object",
+          "properties": {
+            "start": { "type": "integer", "minimum": 1 },
+            "end": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "snippet": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Truncated source snippet"
+        }
+      }
+    },
+    "FixGuidance": {
+      "type": "object",
+      "required": ["safe"],
+      "properties": {
+        "safe": {
+          "type": "boolean",
+          "description": "True if fix is SAFE-only (intent patch, not direct write)"
+        },
+        "description": { "type": "string" },
+        "patch": {
+          "type": "object",
+          "description": "Intent patch for the fix",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": ["add_attribute", "set_attribute", "add_element", "wrap_element"]
+            },
+            "target": { "type": "string" },
+            "value": { "type": "string" }
+          }
+        },
+        "wcag_ref": { "type": "string" }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "required": ["findings_total", "severity_counts"],
+      "properties": {
+        "findings_total": { "type": "integer", "minimum": 0 },
+        "severity_counts": {
+          "type": "object",
+          "properties": {
+            "critical": { "type": "integer", "minimum": 0 },
+            "high": { "type": "integer", "minimum": 0 },
+            "medium": { "type": "integer", "minimum": 0 },
+            "low": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "rules_applied": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Provenance": {
+      "type": "object",
+      "required": ["record_id", "methods", "inputs", "outputs"],
+      "properties": {
+        "record_id": { "type": "string" },
+        "methods": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "inputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "outputs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

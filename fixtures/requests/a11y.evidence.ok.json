@@ -1,0 +1,25 @@
+{
+  "mcp": {
+    "envelope": "mcp.envelope_v0_1",
+    "request_id": "req_fixture_evidence_001",
+    "tool": "a11y.evidence",
+    "client": {
+      "name": "a11y-cli",
+      "version": "0.2.0"
+    }
+  },
+  "input": {
+    "targets": [
+      { "kind": "file", "path": "html/index.html" },
+      { "kind": "file", "path": "html/contact.html" },
+      { "kind": "cli_log", "path": "runs/latest.log" }
+    ],
+    "capture": {
+      "html": { "canonicalize": true, "strip_dynamic": true },
+      "dom": { "snapshot": true, "include_css_selectors": true },
+      "environment": { "include": ["os", "node", "tool_versions"] }
+    },
+    "integrity": { "hash": "sha256" },
+    "labels": ["a11y", "baseline", "wcag-2.2-aa"]
+  }
+}

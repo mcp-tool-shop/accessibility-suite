@@ -1,0 +1,88 @@
+{
+  "mcp": {
+    "envelope": "mcp.envelope_v0_1",
+    "request_id": "req_fixture_evidence_001",
+    "tool": "a11y.evidence",
+    "ok": true
+  },
+  "result": {
+    "bundle": {
+      "bundle_id": "bundle:fixture:9b6d3c01",
+      "labels": ["a11y", "baseline", "wcag-2.2-aa"],
+      "artifacts": [
+        {
+          "artifact_id": "artifact:html:index",
+          "media_type": "text/html",
+          "locator": { "kind": "file", "path": "html/index.html" },
+          "size_bytes": 245,
+          "digest": {
+            "alg": "sha256",
+            "hex": "a1b2c3d4e5f6789012345678901234567890123456789012345678901234abcd"
+          },
+          "labels": ["source", "html", "a11y", "baseline", "wcag-2.2-aa"]
+        },
+        {
+          "artifact_id": "artifact:dom:index",
+          "media_type": "application/json",
+          "locator": { "kind": "derived", "from": "artifact:html:index" },
+          "size_bytes": 1024,
+          "digest": {
+            "alg": "sha256",
+            "hex": "b2c3d4e5f67890123456789012345678901234567890123456789012345abcde"
+          },
+          "labels": ["derived", "dom-snapshot", "a11y", "baseline", "wcag-2.2-aa"]
+        },
+        {
+          "artifact_id": "artifact:html:contact",
+          "media_type": "text/html",
+          "locator": { "kind": "file", "path": "html/contact.html" },
+          "size_bytes": 312,
+          "digest": {
+            "alg": "sha256",
+            "hex": "c3d4e5f678901234567890123456789012345678901234567890123456abcdef"
+          },
+          "labels": ["source", "html", "a11y", "baseline", "wcag-2.2-aa"]
+        },
+        {
+          "artifact_id": "artifact:dom:contact",
+          "media_type": "application/json",
+          "locator": { "kind": "derived", "from": "artifact:html:contact" },
+          "size_bytes": 1156,
+          "digest": {
+            "alg": "sha256",
+            "hex": "d4e5f6789012345678901234567890123456789012345678901234567abcdef0"
+          },
+          "labels": ["derived", "dom-snapshot", "a11y", "baseline", "wcag-2.2-aa"]
+        }
+      ],
+      "provenance": {
+        "record_id": "prov:record:fixture-001",
+        "methods": [
+          "engine.capture.html_canonicalize_v0_1",
+          "engine.capture.dom_snapshot_v0_1",
+          "adapter.integrity.sha256_v0_1",
+          "adapter.provenance.record_v0_1"
+        ],
+        "inputs": ["html/index.html", "html/contact.html"],
+        "outputs": [
+          "artifact:html:index",
+          "artifact:dom:index",
+          "artifact:html:contact",
+          "artifact:dom:contact"
+        ],
+        "verified": false,
+        "timestamp": "2026-01-27T04:12:00.000Z",
+        "agent": {
+          "name": "a11y-mcp-tools",
+          "version": "0.2.0"
+        }
+      },
+      "environment": {
+        "os": { "platform": "win32", "arch": "x64" },
+        "node": "v20.10.0",
+        "tool_versions": { "a11y-mcp-tools": "0.2.0" }
+      },
+      "created_at": "2026-01-27T04:12:00.000Z"
+    }
+  }
+}

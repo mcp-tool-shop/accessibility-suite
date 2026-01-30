@@ -1,0 +1,139 @@
+{
+  "mcp": {
+    "envelope": "mcp.envelope_v0_1",
+    "request_id": "req_fixture_diagnose_001",
+    "tool": "a11y.diagnose",
+    "ok": true
+  },
+  "result": {
+    "diagnosis": {
+      "summary": {
+        "profile": "wcag-2.2-aa",
+        "targets": 2,
+        "findings_total": 4,
+        "severity_counts": {
+          "critical": 0,
+          "high": 3,
+          "medium": 1,
+          "low": 0
+        },
+        "rules_applied": ["lang", "alt", "button-name", "link-name", "label"]
+      },
+      "findings": [
+        {
+          "id": "a11y.lang.missing",
+          "wcag": "wcag.3.1.1",
+          "severity": "high",
+          "message": "Document is missing a lang attribute on <html>.",
+          "targets": [
+            {
+              "artifact_id": "artifact:dom:index",
+              "json_pointer": "/nodes/0",
+              "selector": "html",
+              "snippet": "<html>"
+            }
+          ],
+          "fix": {
+            "safe": true,
+            "description": "Add lang attribute to the html element",
+            "patch": {
+              "action": "add_attribute",
+              "target": "html",
+              "value": "lang=\"en\""
+            },
+            "wcag_ref": "https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html"
+          }
+        },
+        {
+          "id": "a11y.img.missing_alt",
+          "wcag": "wcag.1.1.1",
+          "severity": "high",
+          "message": "Image is missing alt attribute.",
+          "targets": [
+            {
+              "artifact_id": "artifact:dom:index",
+              "json_pointer": "/nodes/5",
+              "selector": "img",
+              "snippet": "<img src=\"hero.jpg\">"
+            }
+          ],
+          "fix": {
+            "safe": true,
+            "description": "Add descriptive alt text or alt=\"\" for decorative images",
+            "patch": {
+              "action": "add_attribute",
+              "target": "img",
+              "value": "alt=\"[describe image]\""
+            },
+            "wcag_ref": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"
+          }
+        },
+        {
+          "id": "a11y.button.missing_name",
+          "wcag": "wcag.4.1.2",
+          "severity": "high",
+          "message": "Button has no accessible name.",
+          "targets": [
+            {
+              "artifact_id": "artifact:dom:contact",
+              "json_pointer": "/nodes/12",
+              "selector": "button",
+              "snippet": "<button><i class=\"icon-send\"></i></button>"
+            }
+          ],
+          "fix": {
+            "safe": true,
+            "description": "Add aria-label or visible text content",
+            "patch": {
+              "action": "add_attribute",
+              "target": "button",
+              "value": "aria-label=\"Send message\""
+            },
+            "wcag_ref": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"
+          }
+        },
+        {
+          "id": "a11y.input.missing_label",
+          "wcag": "wcag.1.3.1",
+          "severity": "medium",
+          "message": "Form input has no associated label.",
+          "targets": [
+            {
+              "artifact_id": "artifact:dom:contact",
+              "json_pointer": "/nodes/8",
+              "selector": "input[type=\"email\"]",
+              "snippet": "<input type=\"email\" name=\"email\">"
+            }
+          ],
+          "fix": {
+            "safe": true,
+            "description": "Add label element with for attribute or aria-label",
+            "patch": {
+              "action": "add_attribute",
+              "target": "input",
+              "value": "aria-label=\"Email address\""
+            },
+            "wcag_ref": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+          }
+        }
+      ],
+      "provenance": {
+        "record_id": "prov:record:fixture-diag-001",
+        "methods": [
+          "engine.diagnose.wcag_rules_v0_1",
+          "engine.extract.evidence.json_pointer_v0_1",
+          "engine.extract.evidence.selector_v0_1",
+          "engine.generate.fix_guidance_v0_1"
+        ],
+        "inputs": [
+          "bundle:fixture:9b6d3c01",
+          "artifact:dom:index",
+          "artifact:dom:contact"
+        ],
+        "outputs": ["diagnosis:fixture-diag-001"],
+        "verified": true,
+        "timestamp": "2026-01-27T04:13:10.000Z"
+      }
+    }
+  }
+}
