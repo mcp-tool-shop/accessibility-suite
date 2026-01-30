@@ -1,0 +1,44 @@
+{
+  "name": "@mcptoolshop/a11y-evidence-engine",
+  "version": "0.2.0",
+  "description": "Headless accessibility evidence engine with prov-spec provenance",
+  "main": "src/cli.js",
+  "bin": {
+    "a11y-engine": "./bin/a11y-engine.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "scan": "node bin/a11y-engine.js scan"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "provenance",
+    "prov-spec",
+    "evidence",
+    "testing",
+    "headless"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/mcp-tool-shop/a11y-evidence-engine#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop/a11y-evidence-engine.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop/a11y-evidence-engine/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "htmlparser2": "^9.1.0"
+  },
+  "devDependencies": {}
+}

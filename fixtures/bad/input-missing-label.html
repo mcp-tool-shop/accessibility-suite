@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Missing Labels</title>
+</head>
+<body>
+  <h1>Form Without Labels</h1>
+
+  <form>
+    <!-- Missing label -->
+    <input type="text" name="username" placeholder="Username">
+
+    <!-- Missing label -->
+    <input type="password" name="password">
+
+    <!-- This is fine (has aria-label) -->
+    <input type="search" aria-label="Search the site">
+
+    <!-- This is fine (hidden) -->
+    <input type="hidden" name="token" value="abc">
+
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+out/
+test-output/
+test-output-vectors/
+demo-out/
+*.log
+.DS_Store
