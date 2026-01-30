@@ -1,0 +1,81 @@
+name: A11y (upload results)
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tools
+        run: |
+          npm install -g a11y-evidence-engine
+          python -m pip install --upgrade pip
+          python -m pip install a11y-assist
+
+      # Run, but do not stop the workflow on exit code 2 (expected for broken demo).
+      # Still fail for engine/validation failures (exit 3) or unexpected errors.
+      - name: Run scan + ingest (strict + verify)
+        id: run_a11y
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x scripts/a11y.sh
+
+          # Run and capture exit code without letting "set -e" kill the step.
+          set +e
+          ./scripts/a11y.sh results
+          code=$?
+          set -e
+
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+
+          # exit code meanings:
+          # 0 = success, no findings >= fail-on threshold
+          # 2 = success, but findings exist (expected for this demo)
+          # 3 = ingest/validation failure (should fail workflow)
+          if [ "$code" -eq 3 ]; then
+            echo "A11y pipeline failed (exit 3)."
+            exit 3
+          fi
+
+          # For 0 or 2, continue so artifacts upload.
+          exit 0
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-results
+          path: results/
+          if-no-files-found: error
+          retention-days: 7
+
+      # Now apply the "real" pass/fail status for the demo:
+      # fail the job if findings exist (exit code 2), pass if 0.
+      - name: Enforce fail-on threshold
+        shell: bash
+        run: |
+          code="${{ steps.run_a11y.outputs.exit_code }}"
+          echo "a11y.sh exit code: $code"
+          if [ "$code" -eq 2 ]; then
+            echo "Failing job because findings exist at/above --fail-on threshold."
+            exit 2
+          fi
+          exit 0

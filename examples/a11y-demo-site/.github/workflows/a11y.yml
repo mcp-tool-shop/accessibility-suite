@@ -1,0 +1,34 @@
+name: A11y (provenance-verified)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tools
+        run: |
+          npm install -g a11y-evidence-engine
+          python -m pip install --upgrade pip
+          python -m pip install a11y-assist
+
+      - name: Run end-to-end scan + ingest (strict + verify)
+        run: |
+          chmod +x scripts/a11y.sh
+          ./scripts/a11y.sh results
