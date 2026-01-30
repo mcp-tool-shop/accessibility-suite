@@ -1,0 +1,8 @@
+{
+  "artifact_id": "clierr-01",
+  "content": {
+    "id": "PAYROLL.EXPORT.SFTP.AUTH",
+    "why": ["Credential method mismatch", "SFTP server rejected key"],
+    "fix": ["Use password auth", "Update SSH key"]
+  }
+}

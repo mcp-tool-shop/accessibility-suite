@@ -1,0 +1,16 @@
+{
+  "_vector_meta": {
+    "id": "integrity.digest.sha256/negative/uppercase_hex",
+    "expect": "fail",
+    "reason": "Digest value uses uppercase hex instead of lowercase"
+  },
+  "artifact": {
+    "schema_version": "artifact.v0.1",
+    "artifact_id": "test-001",
+    "media_type": "application/json",
+    "digest": {
+      "alg": "sha256",
+      "value": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890"
+    }
+  }
+}

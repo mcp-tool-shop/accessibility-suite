@@ -1,0 +1,14 @@
+{
+  "schema_version": "artifact.v0.1",
+  "artifact_id": "clierr-01",
+  "media_type": "application/json",
+  "locator": "file:/tmp/cli_error.json",
+  "digest": {
+    "alg": "sha256",
+    "value": "9f2c6a0e0f76c9d6d8b1c2f9a88d7b6c1e7f0f0b3f4a9b6c2d1a9e7c0b1f2a3c"
+  },
+  "labels": {
+    "role": "cli_error_json",
+    "schema": "cli.error.v0.1"
+  }
+}

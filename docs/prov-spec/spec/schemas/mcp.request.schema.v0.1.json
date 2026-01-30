@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mcp.request.v0.1",
+  "title": "mcp.request.v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tool", "params", "artifacts"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "mcp.request.v0.1"
+    },
+
+    "request_id": {
+      "type": "string",
+      "description": "Optional correlation ID for tracing across systems.",
+      "maxLength": 200
+    },
+
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tool identifier (e.g., a11y-assist.explain, provenance.verify).",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional requested tool version (semver string or tag).",
+          "maxLength": 100
+        }
+      }
+    },
+
+    "params": {
+      "description": "Tool-specific parameters. This schema intentionally does not constrain param shape.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+
+    "artifacts": {
+      "type": "array",
+      "description": "Optional artifact references supplied as inputs to this call. Tools may ignore if not applicable.",
+      "items": { "$ref": "artifact.ref.schema.v0.1.json" }
+    },
+
+    "preferences": {
+      "type": "object",
+      "description": "Optional execution preferences that are not tool semantics.",
+      "additionalProperties": false,
+      "properties": {
+        "deterministic": {
+          "type": "boolean",
+          "description": "Hint that caller prefers deterministic behavior (no timestamps, no network).",
+          "default": true
+        },
+        "max_output_bytes": {
+          "type": "integer",
+          "description": "Optional soft limit for output size.",
+          "minimum": 0
+        },
+        "locale": {
+          "type": "string",
+          "description": "Optional locale hint (e.g., en-US).",
+          "maxLength": 50
+        }
+      }
+    },
+
+    "time": {
+      "type": "string",
+      "description": "Optional RFC3339 timestamp. Omit for strict determinism.",
+      "format": "date-time"
+    }
+  }
+}

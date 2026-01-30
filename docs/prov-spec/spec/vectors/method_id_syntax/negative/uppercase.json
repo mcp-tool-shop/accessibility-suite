@@ -1,0 +1,8 @@
+{
+  "_vector_meta": {
+    "id": "method_id_syntax/negative/uppercase",
+    "expect": "fail",
+    "reason": "Method ID contains uppercase letters"
+  },
+  "method_id": "Adapter.Wrap.Envelope"
+}

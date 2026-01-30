@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prov.record.v0.1",
+  "title": "prov.record.v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "tool", "inputs", "outputs", "methods", "evidence", "parents"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "prov.record.v0.1"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique identifier for this tool run (UUID recommended).",
+      "minLength": 1
+    },
+    "tool": {
+      "type": "object",
+      "description": "Tool identity and versioning metadata.",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tool name, e.g., a11y-assist, payroll-engine, etc.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "version": {
+          "type": "string",
+          "description": "Tool version string, e.g., v0.3.1.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "adapter": {
+          "type": "string",
+          "description": "Optional adapter name, e.g., cli, mcp, api.",
+          "maxLength": 100
+        }
+      }
+    },
+    "time": {
+      "type": "string",
+      "description": "Optional RFC3339 timestamp. Omit for strict determinism.",
+      "format": "date-time"
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Artifacts consumed by this run.",
+      "items": { "$ref": "artifact.schema.v0.1.json" }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Artifacts produced by this run.",
+      "items": { "$ref": "artifact.schema.v0.1.json" }
+    },
+    "methods": {
+      "type": "array",
+      "description": "Stable method identifiers applied during this run (append-only over time).",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200,
+        "pattern": "^[a-z0-9]+([._-][a-z0-9]+)*$"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Evidence mappings from outputs back to input sources.",
+      "items": { "$ref": "evidence.schema.v0.1.json" }
+    },
+    "parents": {
+      "type": "array",
+      "description": "Lineage references to prior run IDs that this run depends on.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "description": "Optional integrity metadata for the provenance record itself.",
+      "additionalProperties": false,
+      "properties": {
+        "record_digest": {
+          "type": "object",
+          "description": "Digest over a canonical serialization of this provenance record (excluding signatures).",
+          "additionalProperties": false,
+          "required": ["alg", "value"],
+          "properties": {
+            "alg": {
+              "type": "string",
+              "enum": ["sha256", "sha512", "blake3"]
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]+$",
+              "minLength": 16
+            }
+          }
+        },
+        "signature": {
+          "type": "object",
+          "description": "Optional signature over record_digest for audit-grade provenance.",
+          "additionalProperties": false,
+          "required": ["alg", "key_id", "value"],
+          "properties": {
+            "alg": {
+              "type": "string",
+              "description": "Signature algorithm identifier.",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "key_id": {
+              "type": "string",
+              "description": "Identifier for the signing key (public key reference).",
+              "minLength": 1,
+              "maxLength": 200
+            },
+            "value": {
+              "type": "string",
+              "description": "Signature value (base64 recommended).",
+              "minLength": 16,
+              "maxLength": 5000
+            }
+          }
+        }
+      }
+    }
+  }
+}

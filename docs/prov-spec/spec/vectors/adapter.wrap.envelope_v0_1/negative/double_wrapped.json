@@ -1,0 +1,14 @@
+{
+  "_vector_meta": {
+    "id": "adapter.wrap.envelope_v0_1/negative/double_wrapped",
+    "expect": "fail",
+    "reason": "Envelope is double-wrapped (nested envelope in result)"
+  },
+  "envelope": {
+    "schema_version": "mcp.envelope.v0.1",
+    "result": {
+      "schema_version": "mcp.envelope.v0.1",
+      "result": {"ok": true}
+    }
+  }
+}

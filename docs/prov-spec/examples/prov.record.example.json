@@ -1,0 +1,35 @@
+{
+  "schema_version": "prov.record.v0.1",
+  "run_id": "9a1c2e9f-5c3f-4a3a-9d5e-1d2b4b6f9c10",
+  "tool": {
+    "name": "a11y-assist",
+    "version": "v0.3.1",
+    "adapter": "cli"
+  },
+  "inputs": [
+    {
+      "schema_version": "artifact.v0.1",
+      "artifact_id": "clierr-01",
+      "media_type": "application/json"
+    }
+  ],
+  "outputs": [
+    {
+      "schema_version": "artifact.v0.1",
+      "artifact_id": "assist-01",
+      "media_type": "application/json"
+    }
+  ],
+  "methods": [
+    "engine.normalize.from_cli_error_v0_1",
+    "guard.validate_profile_transform"
+  ],
+  "evidence": [
+    {
+      "schema_version": "evidence.v0.1",
+      "field": "safest_next_step",
+      "source": "artifact:clierr-01#json:/why/0"
+    }
+  ],
+  "parents": []
+}

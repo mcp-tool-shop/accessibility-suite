@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prov-capabilities.schema.json",
+  "title": "Provenance Capabilities Manifest",
+  "description": "Schema for third-party engine capability declarations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "engine", "implements"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "prov-capabilities@v0.1",
+      "description": "Manifest schema identifier"
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Engine name"
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Engine version (semver recommended)"
+        },
+        "vendor": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Vendor or maintainer name"
+        },
+        "repo": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source repository URL"
+        },
+        "license": {
+          "type": "string",
+          "description": "SPDX license identifier"
+        }
+      }
+    },
+    "implements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*(_v[0-9]+_[0-9]+)?$"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Method IDs this engine fully implements"
+    },
+    "optional": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*(_v[0-9]+_[0-9]+)?$"
+      },
+      "uniqueItems": true,
+      "description": "Method IDs this engine optionally supports"
+    },
+    "conformance_level": {
+      "type": "string",
+      "enum": ["syntax-conformant", "semantics-conformant", "fully-conformant"],
+      "default": "syntax-conformant",
+      "description": "Declared conformance level per PROV_METHODS_SPEC.md Section 9.1"
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization": {
+          "type": "string",
+          "enum": ["jcs-subset", "jcs-full", "custom"],
+          "description": "JSON canonicalization method used"
+        },
+        "max_record_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum provenance record size in bytes"
+        },
+        "max_artifacts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum artifacts per record"
+        },
+        "supported_digest_algorithms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["sha256", "sha512", "blake3"]
+          },
+          "description": "Digest algorithms this engine can compute"
+        }
+      }
+    },
+    "test_vectors_validated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of test vector IDs that have been validated"
+    },
+    "known_deviations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "method_id": { "type": "string" },
+          "deviation": { "type": "string" },
+          "reason": { "type": "string" }
+        },
+        "required": ["method_id", "deviation"]
+      },
+      "description": "Documented deviations from spec"
+    }
+  }
+}

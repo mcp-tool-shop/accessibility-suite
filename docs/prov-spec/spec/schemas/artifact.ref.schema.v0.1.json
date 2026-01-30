@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "artifact.ref.v0.1",
+  "title": "artifact.ref.v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "artifact.ref.v0.1"
+    },
+    "artifact_id": {
+      "type": "string",
+      "description": "Reference by artifact_id (UUID or content-addressed id).",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string",
+      "description": "Reference by location (file path, URL, MCP resource key).",
+      "minLength": 1
+    },
+    "media_type": {
+      "type": "string",
+      "description": "Optional media type hint.",
+      "minLength": 1
+    },
+    "digest": {
+      "type": "object",
+      "description": "Optional digest hint for verification.",
+      "additionalProperties": false,
+      "required": ["alg", "value"],
+      "properties": {
+        "alg": {
+          "type": "string",
+          "enum": ["sha256", "sha512", "blake3"]
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]+$",
+          "minLength": 16
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Optional small labels for routing or UI.",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 200
+      }
+    }
+  },
+  "anyOf": [
+    { "required": ["artifact_id"] },
+    { "required": ["locator"] }
+  ]
+}

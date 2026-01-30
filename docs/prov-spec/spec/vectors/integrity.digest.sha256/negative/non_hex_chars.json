@@ -1,0 +1,16 @@
+{
+  "_vector_meta": {
+    "id": "integrity.digest.sha256/negative/non_hex_chars",
+    "expect": "fail",
+    "reason": "Digest value contains non-hex characters"
+  },
+  "artifact": {
+    "schema_version": "artifact.v0.1",
+    "artifact_id": "test-001",
+    "media_type": "application/json",
+    "digest": {
+      "alg": "sha256",
+      "value": "ghijkl1234567890ghijkl1234567890ghijkl1234567890ghijkl1234567890"
+    }
+  }
+}

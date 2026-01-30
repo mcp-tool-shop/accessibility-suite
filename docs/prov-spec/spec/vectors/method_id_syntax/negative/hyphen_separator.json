@@ -1,0 +1,8 @@
+{
+  "_vector_meta": {
+    "id": "method_id_syntax/negative/hyphen_separator",
+    "expect": "fail",
+    "reason": "Method ID uses hyphens instead of dots"
+  },
+  "method_id": "adapter-wrap-envelope"
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version": "evidence.v0.1",
+  "field": "plan[0]",
+  "source": "artifact:clierr-01#json:/fix/0",
+  "method": "engine.extract.evidence.json_pointer"
+}

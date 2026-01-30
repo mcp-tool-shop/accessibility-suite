@@ -1,0 +1,11 @@
+{
+  "_vector_meta": {
+    "id": "adapter.wrap.envelope_v0_1/negative/wrong_schema_version",
+    "expect": "fail",
+    "reason": "Envelope has wrong schema_version"
+  },
+  "envelope": {
+    "schema_version": "mcp.envelope.v0.2",
+    "result": {"ok": true}
+  }
+}

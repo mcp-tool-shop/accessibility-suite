@@ -1,0 +1,7 @@
+{
+  "canonical_form": "{\"key\":\"value\",\"nested\":{\"a\":1,\"b\":2},\"number\":42}",
+  "digest": {
+    "alg": "sha256",
+    "value": "54fb66ce0aa908012dc9c432d77d16df95a3d5033a557d1c14cfc6d82a63ae34"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "evidence": [
+    {
+      "schema_version": "evidence.v0.1",
+      "field": "anchored_id",
+      "source": "artifact:clierr-01#json:/id"
+    },
+    {
+      "schema_version": "evidence.v0.1",
+      "field": "safest_next_step",
+      "source": "artifact:clierr-01#json:/why/0"
+    },
+    {
+      "schema_version": "evidence.v0.1",
+      "field": "plan[0]",
+      "source": "artifact:clierr-01#json:/fix/0"
+    },
+    {
+      "schema_version": "evidence.v0.1",
+      "field": "plan[1]",
+      "source": "artifact:clierr-01#json:/fix/1"
+    }
+  ]
+}

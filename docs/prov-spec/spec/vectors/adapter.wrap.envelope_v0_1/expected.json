@@ -1,0 +1,4 @@
+{
+  "schema_version": "mcp.envelope.v0.1",
+  "result": {"ok": true, "count": 3, "message": "Operation completed"}
+}

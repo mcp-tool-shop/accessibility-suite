@@ -1,0 +1,97 @@
+{
+  "schema_version": "mcp.envelope.v0.1",
+  "result": {
+    "schema_version": "assist.response.v0.1",
+    "anchored_id": "PAYROLL.EXPORT.SFTP.AUTH",
+    "confidence": "High",
+    "safest_next_step": "Confirm the credential method used for SFTP.",
+    "plan": [
+      "Verify the username and password or the SSH key.",
+      "Re-run the export in dry run mode.",
+      "Retry the upload."
+    ],
+    "next_safe_commands": [
+      "payroll export --batch 2026-01-26 --dry-run"
+    ],
+    "notes": [
+      "This assistance is additive. Original output was not modified."
+    ],
+    "methods_applied": [
+      "engine.normalize.from_cli_error_v0_1",
+      "profile.screen_reader.apply",
+      "guard.validate_profile_transform"
+    ],
+    "evidence": [
+      {
+        "field": "anchored_id",
+        "source": "artifact:clierr-01#json:/id"
+      },
+      {
+        "field": "safest_next_step",
+        "source": "artifact:clierr-01#json:/why/0"
+      }
+    ]
+  },
+  "provenance": {
+    "schema_version": "prov.record.v0.1",
+    "run_id": "9a1c2e9f-5c3f-4a3a-9d5e-1d2b4b6f9c10",
+    "tool": {
+      "name": "a11y-assist",
+      "version": "v0.3.1",
+      "adapter": "cli"
+    },
+    "inputs": [
+      {
+        "schema_version": "artifact.v0.1",
+        "artifact_id": "clierr-01",
+        "media_type": "application/json",
+        "locator": "file:/tmp/cli_error.json",
+        "digest": {
+          "alg": "sha256",
+          "value": "9f2c6a0e0f76c9d6d8b1c2f9a88d7b6c1e7f0f0b3f4a9b6c2d1a9e7c0b1f2a3c"
+        },
+        "labels": {
+          "role": "cli_error_json",
+          "schema": "cli.error.v0.1"
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "schema_version": "artifact.v0.1",
+        "artifact_id": "assist-01",
+        "media_type": "application/json",
+        "digest": {
+          "alg": "sha256",
+          "value": "3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b"
+        },
+        "labels": {
+          "role": "assist_response_json",
+          "schema": "assist.response.v0.1",
+          "profile": "screen-reader"
+        }
+      }
+    ],
+    "methods": [
+      "engine.normalize.from_cli_error_v0_1",
+      "profile.screen_reader.apply",
+      "guard.validate_profile_transform"
+    ],
+    "evidence": [
+      {
+        "schema_version": "evidence.v0.1",
+        "field": "safest_next_step",
+        "source": "artifact:clierr-01#json:/why/0"
+      }
+    ],
+    "parents": []
+  },
+  "meta": {
+    "adapter": "cli",
+    "request_id": "req-abc123",
+    "duration_ms": 42,
+    "schema_hints": {
+      "result": "assist.response.v0.1"
+    }
+  }
+}

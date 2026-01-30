@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a11y-assist.dev/schemas/assist.response.schema.v0.1.json",
+  "title": "assist.response.v0.1",
+  "description": "Response schema for a11y-assist with optional audit metadata",
+  "type": "object",
+  "required": ["confidence", "safest_next_step", "plan"],
+  "properties": {
+    "anchored_id": {
+      "type": ["string", "null"],
+      "description": "Error ID this assist is anchored to, if found"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"],
+      "description": "Confidence level of the assist"
+    },
+    "safest_next_step": {
+      "type": "string",
+      "description": "Single safest next action to take"
+    },
+    "plan": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Ordered list of steps to resolve the issue"
+    },
+    "next_safe_commands": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "SAFE-only commands that can be run"
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional notes and context"
+    },
+    "methods_applied": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0,
+      "description": "Stable method identifiers applied to produce this assist output (audit-only)"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "source"],
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Which output field this evidence supports (e.g., safest_next_step, plan[0])"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source anchor (e.g., cli.error.fix[1], cli.error.why[0], raw_text:Fix:2)"
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional short note clarifying the mapping"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "description": "Trace anchors mapping assist content back to input (audit-only)"
+    }
+  },
+  "additionalProperties": false
+}

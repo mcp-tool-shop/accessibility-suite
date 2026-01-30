@@ -1,0 +1,18 @@
+{
+  "_vector_meta": {
+    "id": "method_id_syntax/positive/valid_ids",
+    "expect": "pass",
+    "reason": "All method IDs conform to grammar"
+  },
+  "method_ids": [
+    "adapter.wrap.envelope_v0_1",
+    "integrity.digest.sha256",
+    "engine.extract.evidence.json_pointer",
+    "lineage.parent.link",
+    "simple",
+    "two.segments",
+    "with_underscore.method",
+    "versioned_v1_0",
+    "adapter.provenance.attach_record_v0_1"
+  ]
+}

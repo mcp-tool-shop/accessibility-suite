@@ -1,0 +1,9 @@
+{
+  "schema_version": "artifact.ref.v0.1",
+  "locator": "file:/tmp/cli_error.json",
+  "media_type": "application/json",
+  "labels": {
+    "role": "cli_error_json",
+    "schema": "cli.error.v0.1"
+  }
+}

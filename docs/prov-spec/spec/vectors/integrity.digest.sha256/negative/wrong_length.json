@@ -1,0 +1,16 @@
+{
+  "_vector_meta": {
+    "id": "integrity.digest.sha256/negative/wrong_length",
+    "expect": "fail",
+    "reason": "Digest value is 32 chars instead of 64"
+  },
+  "artifact": {
+    "schema_version": "artifact.v0.1",
+    "artifact_id": "test-001",
+    "media_type": "application/json",
+    "digest": {
+      "alg": "sha256",
+      "value": "abcdef1234567890abcdef1234567890"
+    }
+  }
+}

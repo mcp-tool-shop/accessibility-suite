@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Verify validator runs
+      run: python tools/python/prov_validator.py --help
+
+    - name: List known methods
+      run: python tools/python/prov_validator.py list-methods
+
+    - name: Run test vector - integrity.digest.sha256
+      run: python tools/python/prov_validator.py check-vector spec/vectors/integrity.digest.sha256
+
+    - name: Run test vector - adapter.wrap.envelope_v0_1
+      run: python tools/python/prov_validator.py check-vector spec/vectors/adapter.wrap.envelope_v0_1
+
+  spec-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Validate JSON schemas
+      run: |
+        python3 -c "
+        import json, sys
+        from pathlib import Path
+        
+        schemas = Path('spec/schemas').glob('*.json')
+        for schema_file in schemas:
+            try:
+                with open(schema_file) as f:
+                    json.load(f)
+                print(f'✓ {schema_file.name} is valid JSON')
+            except json.JSONDecodeError as e:
+                print(f'✗ {schema_file.name} failed: {e}')
+                sys.exit(1)
+        "
+
+    - name: Validate methods catalog
+      run: |
+        python3 -c "
+        import json
+        with open('spec/methods.json') as f:
+            methods = json.load(f)
+        print(f'✓ methods.json is valid JSON')
+        print(f'  Found {len(methods.get(\"methods\", []))} methods')
+        "

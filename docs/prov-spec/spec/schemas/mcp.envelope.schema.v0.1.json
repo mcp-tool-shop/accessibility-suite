@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mcp.envelope.v0.1",
+  "title": "mcp.envelope.v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "result"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "mcp.envelope.v0.1"
+    },
+
+    "result": {
+      "description": "Tool-specific payload. This schema intentionally does not constrain result shape.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+
+    "provenance": {
+      "description": "Optional provenance record for this tool invocation.",
+      "anyOf": [
+        { "$ref": "prov.record.schema.v0.1.json" },
+        { "type": "null" }
+      ]
+    },
+
+    "errors": {
+      "description": "Optional structured errors emitted by the tool or adapter. Tools may also encode errors inside result; this field exists for standardization.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/envelope_error" }
+    },
+
+    "warnings": {
+      "description": "Optional non-fatal warnings (e.g., degraded confidence, partial parsing).",
+      "type": "array",
+      "items": { "$ref": "#/$defs/envelope_warning" }
+    },
+
+    "meta": {
+      "description": "Optional adapter/runtime metadata. Not part of tool semantics.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "adapter": {
+          "type": "string",
+          "description": "Adapter name (e.g., mcp, cli, api).",
+          "maxLength": 100
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Optional request correlation ID.",
+          "maxLength": 200
+        },
+        "duration_ms": {
+          "type": "integer",
+          "description": "Optional duration in milliseconds.",
+          "minimum": 0
+        },
+        "schema_hints": {
+          "type": "object",
+          "description": "Optional hints about schemas used in result, if result is opaque to the caller.",
+          "additionalProperties": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "envelope_error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Stable error code (namespaced).",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "details": {
+          "type": "object",
+          "description": "Optional structured details (small).",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean", "null"]
+          }
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "Whether retrying might succeed.",
+          "default": false
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Optional evidence anchors supporting this error.",
+          "items": { "$ref": "evidence.schema.v0.1.json" }
+        }
+      }
+    },
+
+    "envelope_warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Stable warning code (namespaced).",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable warning message.",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "details": {
+          "type": "object",
+          "description": "Optional structured details (small).",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean", "null"]
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "description": "Optional evidence anchors supporting this warning.",
+          "items": { "$ref": "evidence.schema.v0.1.json" }
+        }
+      }
+    }
+  }
+}

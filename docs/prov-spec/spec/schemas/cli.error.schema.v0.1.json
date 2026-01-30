@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a11y-lint.dev/schemas/cli.error.schema.v0.1.json",
+  "title": "CLI Ground Truth Message",
+  "description": "Schema for accessible CLI error messages with What/Why/Fix structure",
+  "type": "object",
+  "required": ["level", "code", "what"],
+  "properties": {
+    "level": {
+      "type": "string",
+      "enum": ["OK", "WARN", "ERROR"],
+      "description": "Severity level of the message"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]{1,3}[0-9]{3}$",
+      "description": "Unique error code (e.g., A11Y001, CLI002)",
+      "examples": ["A11Y001", "CLI002", "FMT003"]
+    },
+    "id": {
+      "type": "string",
+      "description": "Alternate ID field (NAMESPACE.CATEGORY.DETAIL format)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title"
+    },
+    "what": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 200 },
+        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      ],
+      "description": "Brief description of what happened or was checked"
+    },
+    "why": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 500 },
+        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      ],
+      "description": "Explanation of why this matters for accessibility"
+    },
+    "fix": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 500 },
+        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      ],
+      "description": "Actionable suggestion for how to fix the issue"
+    },
+    "location": {
+      "type": "object",
+      "description": "Location of the issue in the source",
+      "properties": {
+        "file": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "column": { "type": "integer", "minimum": 1 },
+        "context": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "rule": {
+      "type": "string",
+      "description": "Name of the accessibility rule that was checked"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional rule-specific metadata",
+      "additionalProperties": true
+    }
+  },
+  "if": {
+    "properties": {
+      "level": { "const": "ERROR" }
+    }
+  },
+  "then": {
+    "required": ["level", "code", "what", "why", "fix"]
+  },
+  "additionalProperties": true
+}
