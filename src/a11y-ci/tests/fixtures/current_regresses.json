@@ -1,0 +1,7 @@
+{
+  "tool": {"name": "a11y-lint", "version": "0.1.0"},
+  "findings": [
+    {"rule_id": "CLI.COLOR.ONLY", "severity": "serious", "title": "Color-only meaning"},
+    {"rule_id": "CLI.ERROR.STRUCTURE", "severity": "serious", "title": "Missing What/Why/Fix"}
+  ]
+}

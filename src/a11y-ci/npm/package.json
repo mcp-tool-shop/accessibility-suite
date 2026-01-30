@@ -1,0 +1,35 @@
+{
+  "name": "@mcptoolshop/a11y-ci",
+  "version": "0.2.0",
+  "description": "npm wrapper for a11y-ci - CI gate for accessibility scorecards",
+  "bin": {
+    "a11y-ci": "./bin/a11y-ci.js"
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "ci",
+    "testing",
+    "wcag",
+    "python",
+    "wrapper"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop/a11y-ci.git",
+    "directory": "npm"
+  },
+  "homepage": "https://github.com/mcp-tool-shop/a11y-ci#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

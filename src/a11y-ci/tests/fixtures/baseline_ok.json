@@ -1,0 +1,7 @@
+{
+  "tool": {"name": "a11y-lint", "version": "0.1.0"},
+  "summary": {"critical": 0, "serious": 0, "moderate": 1, "minor": 0, "info": 0},
+  "findings": [
+    {"rule_id": "CLI.LINE.LENGTH", "severity": "moderate", "title": "Line too long"}
+  ]
+}

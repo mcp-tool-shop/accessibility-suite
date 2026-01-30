@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "a11y-ci"
+version = "0.1.0"
+description = "CI gate for a11y-lint scorecards (low-vision-first)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com"}
+]
+keywords = [
+    "a11y",
+    "accessibility",
+    "ci",
+    "gate",
+    "low-vision",
+    "scorecard",
+    "testing",
+    "quality-assurance",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "click>=8.1.7",
+  "jsonschema>=4.22.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "ruff>=0.6.0",
+]
+
+[project.scripts]
+a11y-ci = "a11y_ci.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/mcp-tool-shop/a11y-ci"
+Repository = "https://github.com/mcp-tool-shop/a11y-ci"
+Issues = "https://github.com/mcp-tool-shop/a11y-ci/issues"
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
