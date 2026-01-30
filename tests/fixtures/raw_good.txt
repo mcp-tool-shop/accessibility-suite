@@ -1,0 +1,11 @@
+[ERROR] Payment export failed (ID: PAY.EXPORT.SFTP.AUTH)
+
+What:
+  Could not upload the NACHA file.
+
+Why:
+  Credentials were rejected.
+
+Fix:
+  Verify username/password or SSH key.
+  Re-run: payroll export --batch 2026-01-26 --dry-run

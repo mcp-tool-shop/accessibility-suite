@@ -1,0 +1,7 @@
+{
+  "level": "ERROR",
+  "code": "CFG001",
+  "what": "Configuration file missing",
+  "why": "The app cannot start without config.yaml",
+  "fix": "Create config.yaml in the project root"
+}

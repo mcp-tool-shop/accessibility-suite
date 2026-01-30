@@ -1,0 +1,3 @@
+Error: Connection refused
+The server at 192.168.1.100:8080 is not responding.
+Please check the service is running.

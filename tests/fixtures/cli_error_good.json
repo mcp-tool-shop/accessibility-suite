@@ -1,0 +1,9 @@
+{
+  "level": "ERROR",
+  "code": "PAY001",
+  "id": "PAY.EXPORT.SFTP.AUTH",
+  "title": "Payment export failed",
+  "what": ["Could not upload the file."],
+  "why": ["Credentials were rejected."],
+  "fix": ["Verify credentials.", "Re-run: payroll export --batch 2026-01-26 --dry-run"]
+}

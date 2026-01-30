@@ -1,0 +1,20 @@
+ASSIST (Dyslexia):
+
+Anchored ID: DEMO.NETWORK.TIMEOUT
+
+Confidence: High
+
+Safest next step:
+  Start by confirming the cause described under 'Why', then apply the first Fix step.
+
+Plan:
+  - Step 1: Check your network connection.
+  - Step 2: Verify the server is reachable: ping api.example.com
+  - Step 3: Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run
+
+Next safe command:
+  Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run
+
+Notes:
+  - Original title: Request timed out
+  - This assist block is additive; it does not replace the tool's output.

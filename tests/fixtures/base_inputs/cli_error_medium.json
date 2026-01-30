@@ -1,0 +1,16 @@
+{
+  "level": "WARN",
+  "code": "CFG001",
+  "id": "DEMO.CONFIG.DEPRECATED",
+  "title": "Deprecated configuration",
+  "what": [
+    "The 'timeout' field in config.json is deprecated."
+  ],
+  "why": [
+    "This field will be removed in v2.0."
+  ],
+  "fix": [
+    "Use 'request_timeout_ms' instead.",
+    "Re-run: demo-cli validate config.json --dry-run"
+  ]
+}

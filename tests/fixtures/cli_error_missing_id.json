@@ -1,0 +1,7 @@
+{
+  "level": "ERROR",
+  "title": "Payment export failed",
+  "what": ["Could not upload the file."],
+  "why": ["Credentials were rejected."],
+  "fix": ["Verify credentials."]
+}

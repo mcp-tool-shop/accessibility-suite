@@ -1,0 +1,18 @@
+{
+  "level": "ERROR",
+  "code": "NET001",
+  "id": "DEMO.NETWORK.TIMEOUT",
+  "title": "Request timed out",
+  "what": [
+    "The HTTP request did not complete within 30 seconds."
+  ],
+  "why": [
+    "The server did not respond before the timeout limit.",
+    "This may indicate network congestion or server overload."
+  ],
+  "fix": [
+    "Check your network connection.",
+    "Verify the server is reachable: ping api.example.com",
+    "Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run"
+  ]
+}

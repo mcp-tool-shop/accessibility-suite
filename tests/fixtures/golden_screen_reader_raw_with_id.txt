@@ -1,0 +1,14 @@
+ASSIST. Profile: Screen reader.
+Anchored I D: PAY.EXPORT.SFTP.AUTH.
+Confidence: Medium.
+
+Summary: An error was detected with partial information.
+
+Safest next step: Follow the tool's Fix steps.
+
+Steps:
+Step 1: Verify username/password or S S H key.
+Step 2: Re-run: payroll export to batch 2026-01-26 to dry-run.
+
+Next safe command:
+payroll export --batch 2026-01-26 --dry-run

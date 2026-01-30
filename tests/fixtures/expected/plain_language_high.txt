@@ -1,0 +1,14 @@
+ASSIST (Plain Language)
+ID: DEMO.NETWORK.TIMEOUT
+Confidence: High
+
+What to do next:
+  Start by confirming the cause described under 'Why', then apply the first Fix step.
+
+Steps:
+  1. Check your network connection.
+  2. Verify the server is reachable: ping api.example.com.
+  3. Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run.
+
+Safe command:
+  Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run

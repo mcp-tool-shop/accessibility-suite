@@ -1,0 +1,14 @@
+ASSIST. Profile: Screen reader.
+Anchored I D: none.
+Confidence: Low.
+
+Summary: The input did not include a stable error identifier.
+
+Safest next step: Follow the tool's Fix steps.
+
+Steps:
+Step 1: Re-run the command with increased verbosity/logging.
+Step 2: Update the tool to emit I D and What/Why/Fix blocks.
+Step 3: If this is your tool.
+
+Note: No I D found.

@@ -1,0 +1,20 @@
+ASSIST (Cognitive Load):
+- Anchored to: DEMO.NETWORK.TIMEOUT
+- Confidence: High
+
+Goal: Get back to a known-good state.
+
+Safest next step:
+  Start by confirming the cause described under 'Why'.
+
+Plan:
+  First: Check your network connection.
+  Next: Verify the server is reachable: ping api.example.com.
+  Last: Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run.
+
+Next (SAFE):
+  Re-run with increased timeout: demo-cli network-timeout --timeout 60 --dry-run
+
+Notes:
+  - Original title: Request timed out
+  - This assist block is additive; it does not replace the tool's output.

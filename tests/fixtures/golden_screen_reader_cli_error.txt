@@ -1,0 +1,16 @@
+ASSIST. Profile: Screen reader.
+Anchored I D: PAY.EXPORT.SFTP.AUTH.
+Confidence: High.
+
+Summary: Payment export failed.
+
+Safest next step: Confirm the cause described under Why.
+
+Steps:
+Step 1: Verify credentials.
+Step 2: Re-run: payroll export to batch 2026-01-26 to dry-run.
+
+Next safe command:
+payroll export --batch 2026-01-26 --dry-run
+
+Note: Original title: Payment export failed.
