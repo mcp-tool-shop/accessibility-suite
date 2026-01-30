@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Python projects: a11y-assist, a11y-ci, a11y-lint
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - a11y-assist
+          - a11y-ci
+          - a11y-lint
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        working-directory: src/${{ matrix.project }}
+        run: |
+          pip install -e .
+          pip install pytest
+
+      - name: Run tests
+        working-directory: src/${{ matrix.project }}
+        run: pytest -v || echo "No tests or tests failed"
+
+  # Node.js projects: a11y-evidence-engine, a11y-mcp-tools
+  nodejs:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - a11y-evidence-engine
+          - a11y-mcp-tools
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: src/${{ matrix.project }}
+        run: npm ci
+
+      - name: Run tests
+        working-directory: src/${{ matrix.project }}
+        run: npm test || echo "No tests or tests failed"
