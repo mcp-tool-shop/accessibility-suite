@@ -1,6 +1,6 @@
 # a11y-evidence-engine
 
-Headless accessibility evidence engine that emits [prov-spec](https://github.com/mcp-tool-shop/prov-spec) provenance records.
+Headless accessibility evidence engine that emits [prov-spec](https://github.com/mcp-tool-shop-org/prov-spec) provenance records.
 
 Designed to pair with **a11y-assist**: this engine finds issues and captures verifiable evidence; a11y-assist turns those findings into fixes.
 

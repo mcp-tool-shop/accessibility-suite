@@ -52,7 +52,7 @@ pip install a11y-lint
 Or install from source:
 
 ```bash
-git clone https://github.com/mcp-tool-shop/a11y-lint.git
+git clone https://github.com/mcp-tool-shop-org/a11y-lint.git
 cd a11y-lint
 pip install -e ".[dev]"
 ```

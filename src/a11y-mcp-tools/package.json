@@ -23,10 +23,11 @@
   ],
   "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
   "license": "MIT",
-  "homepage": "https://github.com/mcp-tool-shop/a11y-mcp-tools#readme",
+  "homepage": "https://github.com/mcp-tool-shop-org/accessibility-suite#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcp-tool-shop/a11y-mcp-tools.git"
+    "url": "git+https://github.com/mcp-tool-shop-org/accessibility-suite.git",
+    "directory": "src/a11y-mcp-tools"
   },
   "bugs": {
     "url": "https://github.com/mcp-tool-shop/a11y-mcp-tools/issues"

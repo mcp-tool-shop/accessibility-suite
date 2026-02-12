@@ -22,10 +22,11 @@
   ],
   "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
   "license": "MIT",
-  "homepage": "https://github.com/mcp-tool-shop/a11y-evidence-engine#readme",
+  "homepage": "https://github.com/mcp-tool-shop-org/accessibility-suite#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mcp-tool-shop/a11y-evidence-engine.git"
+    "url": "git+https://github.com/mcp-tool-shop-org/accessibility-suite.git",
+    "directory": "src/a11y-evidence-engine"
   },
   "bugs": {
     "url": "https://github.com/mcp-tool-shop/a11y-evidence-engine/issues"

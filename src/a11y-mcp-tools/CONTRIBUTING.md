@@ -8,7 +8,7 @@ Thank you for your interest in contributing to a11y-mcp-tools! We appreciate you
 
 If you find a bug or have a suggestion:
 
-1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop/a11y-mcp-tools/issues)
+1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop-org/a11y-mcp-tools/issues)
 2. If not, create a new issue with:
    - A clear, descriptive title
    - Steps to reproduce (for bugs)

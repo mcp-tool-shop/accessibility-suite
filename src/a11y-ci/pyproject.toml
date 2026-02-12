@@ -50,9 +50,9 @@ dev = [
 a11y-ci = "a11y_ci.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/mcp-tool-shop/a11y-ci"
-Repository = "https://github.com/mcp-tool-shop/a11y-ci"
-Issues = "https://github.com/mcp-tool-shop/a11y-ci/issues"
+Homepage = "https://github.com/mcp-tool-shop-org/a11y-ci"
+Repository = "https://github.com/mcp-tool-shop-org/a11y-ci"
+Issues = "https://github.com/mcp-tool-shop-org/a11y-ci/issues"
 
 [tool.setuptools.packages.find]
 include = ["a11y_ci*"]

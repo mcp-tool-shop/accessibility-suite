@@ -67,5 +67,5 @@ a11y-assist makes CLI tools more humane without sacrificing determinism, debugga
 
 ---
 
-Repository: https://github.com/mcp-tool-shop/a11y-assist
+Repository: https://github.com/mcp-tool-shop-org/a11y-assist
 Release: v0.1.0

@@ -1,0 +1,26 @@
+{
+  "name": "@mcptoolshop/accessibility-suite",
+  "version": "0.1.0",
+  "description": "Unified monorepo for accessibility testing, evidence generation, and compliance tooling",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "testing",
+    "evidence",
+    "provenance",
+    "compliance",
+    "mcp"
+  ],
+  "author": "mcp-tool-shop <64996768+mcp-tool-shop@users.noreply.github.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcp-tool-shop-org/accessibility-suite.git"
+  },
+  "homepage": "https://github.com/mcp-tool-shop-org/accessibility-suite#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}

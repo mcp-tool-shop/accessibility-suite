@@ -8,7 +8,7 @@ Thank you for your interest in contributing to a11y-demo-site! This repository d
 
 If you find a problem or have a suggestion:
 
-1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop/a11y-demo-site/issues)
+1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop-org/a11y-demo-site/issues)
 2. If not, create a new issue with:
    - A clear, descriptive title
    - Steps to reproduce (for bugs)

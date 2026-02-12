@@ -66,8 +66,8 @@ To demonstrate language neutrality, a zero-dependency Node.js provenance engine 
 
 prov-spec v0.1.0 is available now under the MIT license.
 
-- Specification: [github.com/mcp-tool-shop/prov-spec](https://github.com/mcp-tool-shop/prov-spec)
-- Node.js Reference Engine: [github.com/mcp-tool-shop/prov-engine-js](https://github.com/mcp-tool-shop/prov-engine-js)
+- Specification: [github.com/mcp-tool-shop-org/prov-spec](https://github.com/mcp-tool-shop-org/prov-spec)
+- Node.js Reference Engine: [github.com/mcp-tool-shop-org/prov-engine-js](https://github.com/mcp-tool-shop-org/prov-engine-js)
 
 ---
 

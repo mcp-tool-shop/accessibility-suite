@@ -38,10 +38,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/mcp-tool-shop/a11y-assist"
-Repository = "https://github.com/mcp-tool-shop/a11y-assist"
-Issues = "https://github.com/mcp-tool-shop/a11y-assist/issues"
-Changelog = "https://github.com/mcp-tool-shop/a11y-assist/blob/main/RELEASE_NOTES.md"
+Homepage = "https://github.com/mcp-tool-shop-org/a11y-assist"
+Repository = "https://github.com/mcp-tool-shop-org/a11y-assist"
+Issues = "https://github.com/mcp-tool-shop-org/a11y-assist/issues"
+Changelog = "https://github.com/mcp-tool-shop-org/a11y-assist/blob/main/RELEASE_NOTES.md"
 
 [project.optional-dependencies]
 dev = [

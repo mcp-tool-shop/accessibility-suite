@@ -8,7 +8,7 @@ Thank you for your interest in contributing to a11y-ci! This is a CI gate for a1
 
 If you find a bug or have a suggestion:
 
-1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop/a11y-ci/issues)
+1. Check if the issue already exists in [GitHub Issues](https://github.com/mcp-tool-shop-org/a11y-ci/issues)
 2. If not, create a new issue with:
    - A clear, descriptive title
    - Steps to reproduce (for bugs)
@@ -38,7 +38,7 @@ If you find a bug or have a suggestion:
 
 ```bash
 # Clone the repository
-git clone https://github.com/mcp-tool-shop/a11y-ci.git
+git clone https://github.com/mcp-tool-shop-org/a11y-ci.git
 cd a11y-ci
 
 # Create a virtual environment
@@ -137,6 +137,6 @@ Open an issue or start a discussion. We're here to help!
 
 ## Related Projects
 
-- [a11y-lint](https://github.com/mcp-tool-shop/a11y-lint) - Linter that produces scorecards
-- [a11y-assist](https://github.com/mcp-tool-shop/a11y-assist) - CLI assistant for accessibility
-- [a11y-mcp-tools](https://github.com/mcp-tool-shop/a11y-mcp-tools) - MCP tools for accessibility
+- [a11y-lint](https://github.com/mcp-tool-shop-org/a11y-lint) - Linter that produces scorecards
+- [a11y-assist](https://github.com/mcp-tool-shop-org/a11y-assist) - CLI assistant for accessibility
+- [a11y-mcp-tools](https://github.com/mcp-tool-shop-org/a11y-mcp-tools) - MCP tools for accessibility

@@ -21,10 +21,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mcp-tool-shop/a11y-ci.git",
-    "directory": "npm"
+    "url": "git+https://github.com/mcp-tool-shop-org/accessibility-suite.git",
+    "directory": "src/a11y-ci/npm"
   },
-  "homepage": "https://github.com/mcp-tool-shop/a11y-ci#readme",
+  "homepage": "https://github.com/mcp-tool-shop-org/accessibility-suite#readme",
   "engines": {
     "node": ">=18.0.0"
   },

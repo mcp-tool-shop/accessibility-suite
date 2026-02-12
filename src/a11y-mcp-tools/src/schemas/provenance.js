@@ -90,7 +90,7 @@ function createProvRecordV01({
  * Locked Method ID Catalog (v0.1)
  *
  * These IDs are stable and MUST NOT change within a major version.
- * See: https://github.com/mcp-tool-shop/prov-spec
+ * See: https://github.com/mcp-tool-shop-org/prov-spec
  */
 
 /**

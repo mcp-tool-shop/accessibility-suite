@@ -3,7 +3,7 @@
 Stable method IDs for provenance tracking in a11y-mcp-tools.
 
 These IDs are **locked** and MUST NOT change within a major version.
-See [prov-spec](https://github.com/mcp-tool-shop/prov-spec) for the full specification.
+See [prov-spec](https://github.com/mcp-tool-shop-org/prov-spec) for the full specification.
 
 ## Envelope Methods
 
@@ -98,7 +98,7 @@ See [prov-spec](https://github.com/mcp-tool-shop/prov-spec) for the full specifi
 
 ## Related
 
-- [prov-spec](https://github.com/mcp-tool-shop/prov-spec) - Full provenance specification
+- [prov-spec](https://github.com/mcp-tool-shop-org/prov-spec) - Full provenance specification
 - [envelope.schema.v0.1.json](src/schemas/envelope.schema.v0.1.json) - MCP envelope schema
 - [evidence.bundle.schema.v0.1.json](src/schemas/evidence.bundle.schema.v0.1.json) - Bundle schema
 - [diagnosis.schema.v0.1.json](src/schemas/diagnosis.schema.v0.1.json) - Diagnosis schema

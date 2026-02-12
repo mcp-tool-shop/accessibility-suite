@@ -18,7 +18,7 @@ Unified monorepo for accessibility testing, evidence generation, and compliance 
 
 ```bash
 # Clone
-git clone https://github.com/mcp-tool-shop/accessibility-suite.git
+git clone https://github.com/mcp-tool-shop-org/accessibility-suite.git
 cd accessibility-suite
 
 # Python tools (a11y-assist, a11y-ci, a11y-lint)
