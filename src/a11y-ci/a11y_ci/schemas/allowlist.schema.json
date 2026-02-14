@@ -10,11 +10,20 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["finding_id", "expires", "reason"],
+        "required": ["expires", "reason", "owner"],
+        "oneOf": [
+            { "required": ["finding_id"] },
+            { "required": ["id"] },
+            { "required": ["fingerprint"] }
+        ],
         "properties": {
           "finding_id": { "type": "string", "minLength": 3 },
+          "id": { "type": "string", "minLength": 3 },
+          "fingerprint": { "type": "string", "minLength": 64, "maxLength": 64 },
           "expires": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
-          "reason": { "type": "string", "minLength": 10 }
+          "reason": { "type": "string", "minLength": 10 },
+          "owner": { "type": "string", "minLength": 3 },
+          "ticket": { "type": "string" }
         },
         "additionalProperties": false
       }

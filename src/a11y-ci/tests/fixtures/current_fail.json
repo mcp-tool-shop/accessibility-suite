@@ -1,6 +1,13 @@
 {
-  "tool": {"name": "a11y-lint", "version": "0.1.0"},
+  "meta": {
+    "tool": "a11y-lint",
+    "version": "0.1.0"
+  },
   "findings": [
-    {"rule_id": "CLI.COLOR.ONLY", "severity": "serious", "title": "Color-only meaning"}
+    {
+      "severity": "serious",
+      "id": "CLI.COLOR.ONLY",
+      "message": "Color-only meaning"
+    }
   ]
 }

@@ -4,7 +4,8 @@
     {
       "finding_id": "CLI.COLOR.ONLY",
       "expires": "2020-01-01",
-      "reason": "Expired suppression should be flagged and removed."
+      "reason": "Expired suppression should be flagged and removed.",
+      "owner": "LazyOwner"
     }
   ]
 }

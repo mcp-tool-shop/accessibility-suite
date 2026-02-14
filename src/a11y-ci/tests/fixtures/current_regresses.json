@@ -1,7 +1,18 @@
 {
-  "tool": {"name": "a11y-lint", "version": "0.1.0"},
+  "meta": {
+    "tool": "a11y-lint",
+    "version": "0.1.0"
+  },
   "findings": [
-    {"rule_id": "CLI.COLOR.ONLY", "severity": "serious", "title": "Color-only meaning"},
-    {"rule_id": "CLI.ERROR.STRUCTURE", "severity": "serious", "title": "Missing What/Why/Fix"}
+    {
+      "severity": "serious",
+      "id": "CLI.COLOR.ONLY",
+      "message": "Color-only meaning"
+    },
+    {
+      "severity": "serious",
+      "id": "CLI.ERROR.STRUCTURE",
+      "message": "Missing What/Why/Fix"
+    }
   ]
 }

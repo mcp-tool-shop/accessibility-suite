@@ -1,6 +1,13 @@
 {
-  "tool": {"name": "a11y-lint", "version": "0.1.0"},
+  "meta": {
+    "tool": "a11y-lint",
+    "version": "0.1.0"
+  },
   "findings": [
-    {"rule_id": "CLI.LINE.LENGTH", "severity": "moderate", "title": "Line too long"}
+    {
+      "severity": "moderate",
+      "id": "CLI.LINE.LENGTH",
+      "message": "Line too long"
+    }
   ]
 }

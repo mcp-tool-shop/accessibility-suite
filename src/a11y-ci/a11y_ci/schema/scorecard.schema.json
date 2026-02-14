@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "a11y-ci Scorecard",
+  "description": "Standard accessibility finding scorecard for gating",
+  "type": "object",
+  "required": ["meta", "findings"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["tool"],
+      "properties": {
+        "tool": {
+          "type": "string",
+          "description": "Name of the tool that generated this scorecard"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the tool"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to the tool documentation or repository"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "description": "Optional summary counts by severity",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "findings": {
+      "type": "array",
+      "description": "List of accessibility findings",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "message"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable identifier for the rule violated (e.g. 'aria-hidden-body')"
+          },
+          "rule_id": {
+            "type": "string",
+            "description": "Legacy alias for 'id'"
+          },
+          "finding_id": {
+            "type": "string",
+            "description": "Legacy alias for 'id'"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["info", "minor", "moderate", "serious", "critical"],
+            "description": "Severity level of the finding"
+          },
+          "message": {
+            "type": "string",
+            "description": "Human-readable description of the issue"
+          },
+          "location": {
+            "type": "object",
+            "description": "Location of the issue",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "File path or URL"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "fingerprint": {
+              "type": "string",
+              "description": "Stable hash of the finding for deduping"
+          }
+        }
+      }
+    }
+  }
+}

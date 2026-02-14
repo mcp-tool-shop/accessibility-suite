@@ -88,7 +88,7 @@ class TestScorecardLoading:
         """Scorecard correctly loads findings."""
         sc = Scorecard.load(str(FIX / "current_ok.json"))
         assert len(sc.findings) == 1
-        assert sc.findings[0]["rule_id"] == "CLI.LINE.LENGTH"
+        assert sc.findings[0]["id"] == "CLI.LINE.LENGTH"
 
     def test_scorecard_counts_from_summary(self):
         """Scorecard uses summary when present."""
@@ -118,7 +118,7 @@ class TestAllowlistLoading:
         """Allowlist correctly loads entries."""
         allow = Allowlist.load(str(FIX / "allowlist_ok.json"))
         assert len(allow.entries) == 1
-        assert allow.entries[0].finding_id == "CLI.COLOR.ONLY"
+        assert allow.entries[0].id == "CLI.COLOR.ONLY"
         assert allow.entries[0].expires == "2026-12-31"
 
     def test_allowlist_suppressed_ids(self):
@@ -131,4 +131,4 @@ class TestAllowlistLoading:
         allow = Allowlist.load(str(FIX / "allowlist_expired.json"))
         expired = allow.expired_entries()
         assert len(expired) == 1
-        assert expired[0].finding_id == "CLI.COLOR.ONLY"
+        assert expired[0].id == "CLI.COLOR.ONLY"

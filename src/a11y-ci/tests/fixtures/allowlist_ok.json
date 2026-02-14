@@ -4,7 +4,8 @@
     {
       "finding_id": "CLI.COLOR.ONLY",
       "expires": "2026-12-31",
-      "reason": "Temporary suppression for legacy output. Tracked in issue #12."
+      "reason": "Temporary suppression for legacy output. Tracked in issue #12.",
+      "owner": "VisualTeam"
     }
   ]
 }
