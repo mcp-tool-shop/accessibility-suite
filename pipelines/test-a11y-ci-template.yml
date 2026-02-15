@@ -1,0 +1,36 @@
+trigger: none # Manual test
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+  - checkout: self
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'
+
+  - script: |
+      pip install ./src/a11y-ci
+    displayName: 'Install a11y-ci'
+
+  - powershell: |
+      @{ "meta" = @{ "tool" = "test" }; "findings" = @() } | ConvertTo-Json | Out-File pass.json
+      @{ "meta" = @{ "tool" = "test" }; "findings" = @(@{ "id" = "FAIL"; "severity" = "serious" }) } | ConvertTo-Json | Out-File fail.json
+    displayName: 'Create Fixtures'
+
+  - template: templates/a11y-ci.yml
+    parameters:
+      current: 'pass.json'
+      failOn: 'serious'
+      platform: 'ado'
+      postComment: true
+      artifactName: 'artifacts-pass'
+
+  - template: templates/a11y-ci.yml
+    parameters:
+      current: 'fail.json'
+      failOn: 'serious'
+      platform: 'ado'
+      postComment: true
+      artifactName: 'artifacts-fail'

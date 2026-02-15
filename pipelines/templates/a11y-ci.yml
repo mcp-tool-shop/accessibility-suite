@@ -1,0 +1,135 @@
+# Drop-in template for Azure DevOps pipelines
+parameters:
+  - name: current
+    type: string
+    default: ''
+  - name: baseline
+    type: string
+    default: ''
+  - name: allowlist
+    type: string
+    default: ''
+  - name: failOn
+    type: string
+    default: 'serious'
+  - name: top
+    type: number
+    default: 10
+  - name: emitMcp
+    type: boolean
+    default: true
+  - name: platform
+    type: string
+    default: 'ado'
+  - name: artifactName
+    type: string
+    default: 'a11y-artifacts'
+  - name: postComment
+    type: boolean
+    default: true
+
+steps:
+  - task: PowerShell@2
+    displayName: 'Accessibility Gate'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $scriptPath = "$(Build.SourcesDirectory)/tools/ado/a11y-ci.ps1"
+        if (-not (Test-Path $scriptPath)) {
+            Write-Error "Wrapper script not found at $scriptPath. Ensure repo is checked out."
+            exit 1 # Internal error
+        }
+        
+        # Execute wrapper, pass parameters
+        # Note: PowerShell arguments need care with quotes/spaces
+        $params = @{
+            Current = "${{ parameters.current }}"
+            FailOn = "${{ parameters.failOn }}"
+            Top = ${{ parameters.top }}
+            Platform = "${{ parameters.platform }}"
+            PostComment = [bool]::Parse("${{ parameters.postComment }}")
+        }
+        
+        if ("${{ parameters.baseline }}" -ne "") { $params['Baseline'] = "${{ parameters.baseline }}" }
+        if ("${{ parameters.allowlist }}" -ne "") { $params['Allowlist'] = "${{ parameters.allowlist }}" }
+        
+        & $scriptPath @params
+        exit $LASTEXITCODE
+      
+      failOnStderr: false # Allow stderr (a11y-ci logs) without failing task immediately, check exit code
+      ignoreLASTEXITCODE: false # We handle exit code manually? No, task fails on non-zero.
+      # Wait, task fails if exit code != 0.
+      # Gate failure (3) IS a failure. So task SHOULD fail.
+      # But we want artifacts published even on failure.
+      continueOnError: true # This makes the *pipeline* continue even if task fails (so later steps run)
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Accessibility Artifacts'
+    condition: always()
+
+    inputs:
+      targetPath: 'artifacts/a11y'
+      artifact: '${{ parameters.artifactName }}'
+      publishLocation: 'pipeline'
+
+  - task: PowerShell@2
+    displayName: 'Post PR Comment'
+    condition: and(succeededOrFailed(), eq('${{ parameters.postComment }}', 'true'), eq(variables['Build.Reason'], 'PullRequest'))
+    inputs:
+      targetType: 'inline'
+      script: |
+        $commentPath = "artifacts/a11y/comment.md"
+        if (Test-Path $commentPath) {
+            # Use separate script for posting if needed, or inline REST call
+            # For simplicity, let's keep it minimal here or use a reusable task?
+            # Inline REST call
+            
+            $content = Get-Content -Raw $commentPath
+            $marker = "<!-- a11y-ci-sticky-comment -->"
+            $body = "$marker`n$content"
+            
+            $collectionUri = "$(System.CollectionUri)"
+            $repoId = "$(Build.Repository.ID)"
+            $prId = "$(System.PullRequest.PullRequestId)"
+            $project = "$(System.TeamProject)"
+            
+            $url = "$collectionUri$project/_apis/git/repositories/$repoId/pullRequests/$prId/threads?api-version=6.0"
+            
+            # Auth header
+            $header = @{ Authorization = "Bearer $(System.AccessToken)" }
+            
+            try {
+                # List threads to find existing
+                $threads = Invoke-RestMethod -Uri $url -Method Get -Headers $header
+                $existing = $threads.value | Where-Object { $_.comments[0].content -match "<!-- a11y-ci-sticky-comment -->" }
+                
+                if ($existing) {
+                    # Update (requires finding comment ID inside thread)
+                    $threadId = $existing.id
+                    $commentId = $existing.comments[0].id
+                    $updateUrl = "$collectionUri$project/_apis/git/repositories/$repoId/pullRequests/$prId/threads/$threadId/comments/$commentId?api-version=6.0"
+                    
+                    $payload = @{ content = $body; commentType = "text" } | ConvertTo-Json
+                    Invoke-RestMethod -Uri $updateUrl -Method Patch -Headers $header -Body $payload -ContentType "application/json"
+                    Write-Host "Updated comment on thread $threadId"
+                }
+                else {
+                    # Create new thread
+                    $payload = @{
+                        comments = @(
+                            @{ parentCommentId = 0; content = $body; commentType = "text" }
+                        )
+                        status = "active"
+                    } | ConvertTo-Json -Depth 5
+                    
+                    Invoke-RestMethod -Uri $url -Method Post -Headers $header -Body $payload -ContentType "application/json"
+                    Write-Host "Created new comment thread"
+                }
+            }
+            catch {
+                Write-Warning "Failed to post PR comment: $_"
+                # Do not fail the build for comment issues
+            }
+        }
