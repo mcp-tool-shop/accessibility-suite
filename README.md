@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="logo.png" width="200" alt="accessibility-suite">
+</p>
+
 # accessibility-suite
 
 > Part of [MCP Tool Shop](https://mcptoolshop.com)
